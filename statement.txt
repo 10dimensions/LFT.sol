@@ -1,0 +1,95 @@
+Here’s the first part of a coding challenge I want to share with you
+
+
+* Land Tokenization Solidity contract
+
+* create an ERC-1155 multi-token contract that supports:
+
+* token types:
+
+* PLOT: a rectangular plot of land, with:
+
+* bounds given in latitude / longitude (eg. minLat, maxLat, minLon, maxLon)
+
+* external URL
+
+* associated resource estimates (0..N), with:
+
+* type of resource (string)
+
+* amount of resource (integer)
+
+* which unit used for amount (KG or LITRE constant)
+
+* RESOURCE_LICENSE: a license to develop a given amount of resource within a                                                 given PLOT, with:
+
+* which PLOT (token ID)
+
+* also has bounds, within the PLOT's overall bounds
+
+* name and ID of licensee
+
+* external URL
+
+* query methods:
+
+* number (supply) of registered PLOTs / RESOURCE_LICENSEs
+
+* summary info about a PLOT / RESOURCE_LICENSE given its token ID
+
+* returned as a single struct
+
+* transactions:
+
+* mint a PLOT with given bounds and URL, assigned to a given owner address
+
+* add resource estimate to a given PLOT
+
+* mint a RESOURCE_LICENSE for a given PLOT, resource type, amount + unit, and owner
+
+* the PLOT must have a resource estimate of the appropriate type
+
+* transfer an existing PLOT / RESOURCE_LICENSE to a different owner address
+
+
+
+* metadata and visualization:
+
+* attach each PLOT NFT with meta-data of the geospatial image they represent along with all of the metadata 
+
+* store the meta-data on Arcweave or IPFS and make it retrievable 
+
+* have an easy way to explore or navigate through the metadata 
+
+
+
+Second coding part: 
+
+ERC TOKEN FUNCTIONS
+
+- Create a ERC20 META token that will function as the "base currency" of the metaverse 
+
+- Create a simple website with wallet integration to allow people to mint and purchase a PLOT with META tokens
+
+- List META/ETH as a trading pair on a DEX 
+
+- Create a staking function that allows people to stake META and earn more META 
+
+
+
+Notes: 
+
+This coding example is to illustrate a proof of concept, doesn't have to be production quality
+
+- but include checks for the main preconditions
+
+- document any known limitations / issues
+
+- deploy and test on one of the Ethereum (or Polygon) testnets
+
+
+
+
+
+--
+
