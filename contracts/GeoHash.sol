@@ -1,3 +1,4 @@
+//SPDX-License-Identifier: Unlicense
 /**
  * Copyright (c) 2011, Sun Ning.
  *
@@ -76,7 +77,7 @@ contract GeoHash {
     }
 
 
-    /**
+    /*
     * Significant Figure Hash Length
     *
     * This is a quick and dirty lookup to figure out how long our hash
