@@ -28,7 +28,7 @@ pragma solidity ^0.8.0;
 
 contract GeoHash {
 
-    bytes32 BASE32_CODES = "0123456789bcdefghjkmnpqrstuvwxyz";
+    string BASE32_CODES = "0123456789bcdefghjkmnpqrstuvwxyz";
     mapping(bytes32 => uint32) BASE32_CODES_DICT;
 
     string ENCODE_AUTO = 'auto';
@@ -104,52 +104,72 @@ contract GeoHash {
     * @returns {String}
     */
 
-    /*
-    function encode(uint256 latitude, uint32 longitude, string numberOfChars) internal{
+    /**/
+    string[] chars;
 
+    function concat(string[] calldata words) external pure returns (string memory) {
+        bytes memory output;
 
-        var chars = [],
-        bits = 0,
-        bitsTotal = 0,
-        hash_value = 0,
-        maxLat = MAX_LAT,
-        minLat = MIN_LAT,
-        maxLon = MAX_LON,
-        minLon = MIN_LON,
-        mid;
+        for (uint256 i = 0; i < words.length; i++) {
+            output = abi.encodePacked(output, words[i]);
+        }
 
-        while (chars.length < numberOfChars) {
-            if (bitsTotal % 2 === 0) {
-            mid = (maxLon + minLon) / 2;
-            if (longitude > mid) {
-                hash_value = (hash_value << 1) + 1;
-                minLon = mid;
-            } else {
-                hash_value = (hash_value << 1) + 0;
-                maxLon = mid;
+        return string(output);
+    }
+
+    function encode(int256 latitude, int32 longitude, uint32 numberOfChars) internal{
+
+        uint32 bits = 0;
+        uint32 bitsTotal = 0;
+        uint32 hash_value = 0;
+        int32 maxLat = MAX_LAT;
+        int32 minLat = MIN_LAT;
+        int32 maxLon = MAX_LON;
+        int32 minLon = MIN_LON;
+        int32 mid;
+
+        while (chars.length < numberOfChars)
+        {
+            if (bitsTotal % 2 == 0) 
+            {
+                mid = (maxLon + minLon) / 2;
+                if (longitude > mid)
+                {
+                    hash_value = (hash_value << 1) + 1;
+                    minLon = mid;
+                } 
+                else
+                {
+                    hash_value = (hash_value << 1) + 0;
+                    maxLon = mid;
+                }
             }
-            } else {
-            mid = (maxLat + minLat) / 2;
-            if (latitude > mid) {
-                hash_value = (hash_value << 1) + 1;
-                minLat = mid;
-            } else {
-                hash_value = (hash_value << 1) + 0;
-                maxLat = mid;
-            }
+            else
+            {
+                mid = (maxLat + minLat) / 2;
+                if (latitude > mid)
+                {
+                    hash_value = (hash_value << 1) + 1;
+                    minLat = mid;
+                }
+                else
+                {
+                    hash_value = (hash_value << 1) + 0;
+                    maxLat = mid;
+                }
             }
 
             bits++;
             bitsTotal++;
-            if (bits === 5) {
-            var code = BASE32_CODES[hash_value];
+            if (bits == 5) {
+            string code = BASE32_CODES[hash_value];
             chars.push(code);
             bits = 0;
             hash_value = 0;
             }
         }
-        return chars.join('');
-    };
-    */
+        return concat(chars);
+    }
+    
 
 }
